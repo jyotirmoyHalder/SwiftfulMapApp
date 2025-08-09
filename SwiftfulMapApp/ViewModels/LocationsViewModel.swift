@@ -23,11 +23,14 @@ class LocationsViewModel: ObservableObject {
     
     // Current region on map
     @Published var mapRegion: MKCoordinateRegion = MKCoordinateRegion()
-    let mapSpan = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+    let mapSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     
     
     // Show list of locations
     @Published var showLocationsList: Bool = false
+    
+    // Show location detail via sheet
+    @Published var sheetLocation: Location? = nil
     
     @Published var cameraPosition: MapCameraPosition = .region(
         MKCoordinateRegion(
