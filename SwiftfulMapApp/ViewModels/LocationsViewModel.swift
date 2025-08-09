@@ -25,8 +25,15 @@ class LocationsViewModel: ObservableObject {
     @Published var mapRegion: MKCoordinateRegion = MKCoordinateRegion()
     let mapSpan = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
     
+    
     // Show list of locations
     @Published var showLocationsList: Bool = false
+    
+    @Published var cameraPosition: MapCameraPosition = .region(
+        MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: 41.8902, longitude: 12.4922),
+            span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+    )
     
     init() {
         let locations = LocationsDataService.locations
@@ -41,6 +48,7 @@ class LocationsViewModel: ObservableObject {
             mapRegion = MKCoordinateRegion(
                 center: location.coordinates,
                 span: mapSpan)
+            cameraPosition = .region(mapRegion)
         }
     }
     

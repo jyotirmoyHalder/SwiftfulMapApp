@@ -14,11 +14,17 @@ struct LocationsView: View {
     
     @EnvironmentObject private var vm: LocationsViewModel
     
-    
     var body: some View {
         ZStack {
-            Map(coordinateRegion: $vm.mapRegion)
-                .ignoresSafeArea()
+            Map(position: $vm.cameraPosition) {
+                ForEach(vm.locations) { location in
+                    Annotation(location.name, coordinate: location.coordinates) {
+                        Image(systemName: "mappin.circle.fill")
+                            .foregroundColor(.red)
+                    }
+                }
+            }
+//                .ignoresSafeArea()
             
             VStack(spacing: 0) {
                 header
